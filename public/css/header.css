@@ -16,6 +16,8 @@ header section nav{
 header nav ul li a,
 header a{
     color: white;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
 }
 header nav ul li a:hover,
 header a:hover{
@@ -26,7 +28,7 @@ header a:hover{
     margin: 0px;
 }
 .logo a{
-    font-family: 'Fjalla One', sans-serif;
+    font-family: 'Prompt', sans-serif;
     color: white;
 }
 .logo a:hover {
@@ -51,4 +53,9 @@ header div.uk-navbar-center ul li:nth-last-child(1){
 }
 header nav form input, header nav form ::placeholder, header nav form span{
     color: white !important;
+}
+.uk-background-primary{
+    background-color: #0076afd9 !important;
+   /* #3d4346d6 !important
+   #0d5d8ce0*/
 }
