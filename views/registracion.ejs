@@ -9,10 +9,18 @@
     <main>
         <div class="uk-section uk-section-small">
             <div class="uk-container uk-container-large uk-flex uk-flex-middle uk-flex-center">
-                <form action="">
-                    
-                    <h2>(Formulario de registración)</h2>
-            
+                <form method="POST" action=""> 
+                    <label class="form-label">Nombre:</label>
+                    <input class="form-input" type="text" name="nombre" value="">
+                    <label class="form-label">Apellido:</label>
+                    <input class="form-input" type="text" name="apellido" value="">
+                    <label class="form-label">Email:</label>
+                    <input class="form-input" type="email" name="email" value="">
+                    <label class="form-label">Contraseña:</label>
+                    <input class="form-input" type="password" name="password" value="">
+                    <label class="form-label">Fecha de nacimiento:</label>
+                    <input class="form-input" type="date" name="birthday" value=""> 
+                    <button type="submit"> Enviar</button>
                 </form>
             </div>
         </div>
