@@ -1,4 +1,4 @@
-const db = require('../data/data');
+const db = require('../data/usersData');
 
 let userController = {
     profile: function(req, res) {
