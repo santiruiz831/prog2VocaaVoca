@@ -33,11 +33,11 @@ FOREIGN KEY (post_id) REFERENCES posts (id)
 );
 
 INSERT INTO users VALUES 
-(default, "Santiago", "Ruiz", "sruiz@udesa.edu.ar", "hola123", "/img/Santi.png", "2001-08-13", "20");
-(default, "Micaela", "Salas", "msalas@udesa.edu.ar", "1234", "/img/Mica,png", "2001-09-15", "20"),
-(default, "Pehuen", "Romani", "promani@digitalhouse.edu.ar", "1230", "/img/pehuen.png", "1985-09-12", "36"),
-(default, "Maca", "Amijo", "maca@digitalhouse.edu.ar", "0000", "/img/maca.png", "1995-09-12", "26"),
-(default, "Everaldo", "Guevara", "everaldo@digitalhouse.edu.ar", "1111", "/img/everaldo.png", "1984-08-11", "37");
+(default, "Santiago", "Ruiz", "sruiz@udesa.edu.ar", "hola123", "/img/Santi.png", "2001-08-13", "1126112001"),
+(default, "Micaela", "Salas", "msalas@udesa.edu.ar", "chau1234", "/img/Mica,png", "2001-09-15", "1126112001"),
+(default, "Pehuen", "Romani", "promani@digitalhouse.edu.ar", "p1230", "/img/pehuen.png", "1985-09-12", "1126112001"),
+(default, "Maca", "Amijo", "maca@digitalhouse.edu.ar", "maca0000", "/img/maca.png", "1995-09-12", "1126112001"),
+(default, "Everaldo", "Guevara", "everaldo@digitalhouse.edu.ar", "eve1111", "/img/everaldo.png", "1984-08-11", "1126112001");
 
 INSERT INTO posts VALUES
 (default, default , "Los gatos son mejores que los perros", "/images/img1.jpeg", "2001-08-13" ),
