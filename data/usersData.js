@@ -29,7 +29,7 @@ list: [
       imgPerfil: "/images/avatar/avatarF.png",
     },
     {
-      nombreUsuario: "usuarioanonimo14",
+      nombreUsuario: "juancito23",
       seguidores: 0,
       publicaciones: 2,
       seguidos: 20,

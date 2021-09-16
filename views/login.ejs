@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-
-    <%- include('./partials/head') %> 
-<body>
+<%- include('./partials/head') %> 
+    
+    <body>
     <%- include("./partials/headerDeslogueado") %> 
 
-    <main>
-        <div class="uk-section uk-section-small">
-            <div class="uk-container uk-container-large uk-flex uk-flex-middle uk-flex-center">
-                <form action="/login" method="POST">
-
-
-                
+   
+            <div class="main-w3layouts wrapper">
+                <h1>Iniciar Sesión</h1>
+                <div class="main-agileinfo">
+                    <div class="agileits-top">
+                    <form action="#" method="post">
+                        <input class="text email" type="email" name="email" placeholder="email" required="">
+                        <input class="text" type="password" name="password" placeholder="password" required="">
+                        <div class="wthree-text">
+                            <div class="clear"> </div>
+                        </div>
+                        <input type="submit" value="Registrarse">
+                    </form>
+                    <p>No tenes cuenta? <a href="/views/registracion.ejs">Registrarse</a></p>
                 </form>
             </div>
         </div>

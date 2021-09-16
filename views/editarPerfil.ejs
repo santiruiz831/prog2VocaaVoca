@@ -1,21 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+ <%- include('./partials/head') %> 
 
-    <%- include('./partials/head') %> 
-
-<body>
+ <body>
     <%- include('./partials/headerLogueado') %> 
 
-    <main>
-        <div class="uk-section uk-section-small">
-            <div class="uk-container uk-container-large uk-flex uk-flex-middle uk-flex-center">
-                <form action="">
-                    
-                    <h2>(Formulario para editar los datos de perfil del usuario)</h2>
-            
-                </form>
-            </div>
-        </div>
+	
+	<div class="main-w3layouts wrapper">
+		<h1>Editar Perfil</h1>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				<form action="#" method="post">
+					<input class="text" type="text" name="nombre" placeholder="nombre" required="">
+					<br>
+					<input class="text" type="text" name="apellido" placeholder="apellido" required="">
+					<input class="text email" type="email" name="email" placeholder="Email" required="">
+					<input class="text" type="password" name="password" placeholder="Password" required="">
+					<input class="text w3lpass" type="password" name="password" placeholder="Confirm Password" required="">
+          <input class="date" type="date" name="date" placeholder="" required="">
+
+					<div class="wthree-text">
+					</div>
+					<input type="submit" value="Guardar Cambios">
+			</div>
+		</div>
+	</div>
     </main>
 
     <%- include('./partials/footer') %> 

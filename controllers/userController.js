@@ -1,8 +1,9 @@
 const db = require('../data/usersData');
+const postData = require('../data/postData');
 
 let userController = {
     profile: function(req, res) {
-        res.render('miPerfil', {title: 'perfil', data: db});
+        res.render('miPerfil', {title: 'perfil', data: db, postInfo: postData.listaPosts});
     },
     editProfile: function(req, res) {
         res.render('editarPerfil', {title: 'editarPerfil'});
