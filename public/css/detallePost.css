@@ -6,7 +6,7 @@ article.detalle-post{
 }
 
 article.detalle-post .imagen-post{
-
+    max-width: 100px;
 }
 
 .comentarios-detalle{
