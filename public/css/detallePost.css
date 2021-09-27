@@ -1,12 +1,9 @@
 section.detalle-container{
     border: 1px solid lightgray;
 }
-article.detalle-post{
-    /* border-right: 1px solid lightgray; */
-}
 
-article.detalle-post .imagen-post{
-    max-width: 100px;
+article.img.detalle-post .imagen-post{
+    width: 100px;
 }
 
 .comentarios-detalle{
