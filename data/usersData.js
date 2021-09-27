@@ -1,6 +1,7 @@
 let usersData = {
 list: [
     {
+      id: 1,
       nombreUsuario: "mariaperez",
       seguidores: 22,
       publicaciones: 15,
@@ -8,6 +9,7 @@ list: [
       imgPerfil: "/images/avatar/avatarF.png",
     },
     {
+      id: 2, 
       nombreUsuario: "santiago_2021",
       seguidores: 8,
       publicaciones: 2,
@@ -15,6 +17,7 @@ list: [
       imgPerfil: "/images/avatar/avatarM.png",
     },
     {
+      id: 3, 
       nombreUsuario: "rodrigoavatar",
       seguidores: 5,
       publicaciones: 18,
@@ -22,6 +25,7 @@ list: [
       imgPerfil: "/images/avatar/avatarM.png",
     },
     {
+      id: 4,
       nombreUsuario: "micaela19",
       seguidores: 8,
       publicaciones: 2,
@@ -29,6 +33,7 @@ list: [
       imgPerfil: "/images/avatar/avatarF.png",
     },
     {
+      id: 5,
       nombreUsuario: "juancito23",
       seguidores: 0,
       publicaciones: 2,
