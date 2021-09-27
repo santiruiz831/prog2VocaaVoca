@@ -9,23 +9,23 @@
 		<div class="main-agileinfo">
 			<div class="agileits-top">
 				<form action="/" method="GET">
-					<p>Nombre<input class="text" type="text" name="nombre" placeholder="nombre" ></p>
-					<br>
-					<p>Apellido<input class="text" type="text" name="apellido" placeholder="apellido" ></p>
-					<p class="text2"> Email<input class="text email" type="email" name="email" placeholder="Email" ></p>
-					<p>Contraseña<input class="text" type="password" name="password" placeholder="Password" ></p>
-					<p class="text2">Conformar Contraseña <input class="text w3lpass" type="password" name="password" placeholder="Confirm Password" ></p>
-					<p>Fecha <input class="date" type="date" name="email" placeholder="" ></p>
+					<input class="text w3lpass" type="text" name="nombre" placeholder="Name" required="">
+					
+					<input class="text2 text w3lpass" type="text" name="apellido" placeholder="Surname" required="">
+					<input class="text2 text w3lpass " type="email" name="email" placeholder="Email"required="" >
+					<input class="text w3lpass" type="password" name="password" placeholder="Password" required="">
+					<input class=" text2 text w3lpass" type="password" name="Contraseña" placeholder="Confirm Password" required="">
+					<input class="text2 date" type="date" name="Email" placeholder=""required="" ></p>
 
 					<div class="wthree-text">
 						<label class="anim">
-							<input type="checkbox" class="checkbox" >
-							<span>Acepto los terminos y condiciones</span>
+							<input type="checkbox" class="checkbox" required="" >
+							<span>Acepto los términos y condiciones</span>
 						</label>
 					</div>
 					<input type="submit" value="Registrarse">
 				</form>
-				<p>Ya tenes cuenta? <a href="/users/login"> Iniciar Sesión</a></p>
+				<p>Ya tenés cuenta? <a href="/users/login"> Iniciar sesión</a></p>
 			</div>
 		</div>
 	</div>
