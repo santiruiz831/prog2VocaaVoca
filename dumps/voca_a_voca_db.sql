@@ -19,6 +19,7 @@ user_id INT UNSIGNED,
 description TEXT,
 img VARCHAR(300),
 created_at TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (user_id) REFERENCES users (id)    
 );
 
@@ -28,6 +29,7 @@ user_id INT UNSIGNED,
 post_id INT UNSIGNED,
 content TEXT,
 created_at TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (user_id) REFERENCES users (id),
 FOREIGN KEY (post_id) REFERENCES posts (id)
 );
@@ -40,19 +42,19 @@ INSERT INTO users VALUES
 (default, "Everaldo", "Guevara", "everaldo@digitalhouse.edu.ar", "eve1111", "/img/everaldo.png", "1984-08-11", "1126112001");
 
 INSERT INTO posts VALUES
-(default, 1 , "Los gatos son mejores que los perros", "/images/img1.jpeg", "2001-08-13" ),
-(default, 2 , "Tenemos mucho que aprender de los perritos", "/images/img1.jpeg", "2001-08-13" ),
-(default, 3 , "Mi perrito es lo mejor que hay", "/images/img1.jpeg", "2001-08-13" ),
-(default, 4 , "Morfable el golden", "/images/img1.jpeg", "2001-08-13" ),
-(default, 5 , "La importancia de hacer las cosas por nosotros mismos", "/images/img1.jpeg", "2001-08-13" ),
-(default, 1 , "Gandi, un adelantado de la época", "/images/img1.jpeg", "2001-08-13" ),
-(default, 2 , "Gran refelxión", "/images/img1.jpeg", "2001-08-13" ),
-(default, 3 , "Cerati el mejor músico argentino de la historia", "/images/img1.jpeg", "2001-08-13" ),
-(default, 4 , "La musica es un camino de ida", "/images/img1.jpeg", "2001-08-13" ),
-(default, 5 , "No se si la música solucionará mis problemas, pero por lo menos me voy a olvidar de ellos", "/images/img1.jpeg", "2001-08-13" );
+(default, 1 , "Los gatos son mejores que los perros", "/images/img1.jpeg", "2001-08-13", "2001-08-13" ),
+(default, 2 , "Tenemos mucho que aprender de los perritos", "/images/img1.jpeg", "2001-08-13", "2001-08-13" ),
+(default, 3 , "Mi perrito es lo mejor que hay", "/images/img1.jpeg", "2001-08-13", "2001-08-13" ),
+(default, 4 , "Morfable el golden", "/images/img1.jpeg", "2001-08-13", "2001-08-13" ),
+(default, 5 , "La importancia de hacer las cosas por nosotros mismos", "/images/img1.jpeg", "2001-08-13", "2001-08-13" ),
+(default, 1 , "Gandi, un adelantado de la época", "/images/img1.jpeg", "2001-08-13", "2001-08-13" ),
+(default, 2 , "Gran refelxión", "/images/img1.jpeg", "2001-08-13", "2001-08-13" ),
+(default, 3 , "Cerati el mejor músico argentino de la historia", "/images/img1.jpeg", "2001-08-13", "2001-08-13" ),
+(default, 4 , "La musica es un camino de ida", "/images/img1.jpeg", "2001-08-13", "2001-08-13" ),
+(default, 5 , "No se si la música solucionará mis problemas, pero por lo menos me voy a olvidar de ellos", "/images/img1.jpeg", "2001-08-13", "2001-08-13" );
 
 INSERT INTO comments VALUES
-(default, 1, 1, "Que inspirador", "2021-09-15"),
-(default, 2, 2, "Pobres perritos", "2021-09-15" ),
-(default, 3, 3, "Aguante Voca a Voca", "2021-09-15"),
-(default, 4, 4, "Quiero estudiar Neogios Digitales, con quien puedo hablar?", "2021-09-15");
+(default, 1, 1, "Que inspirador", "2021-09-15", "2021-09-15"),
+(default, 2, 2, "Pobres perritos", "2021-09-15", "2021-09-15" ),
+(default, 3, 3, "Aguante Voca a Voca", "2021-09-15", "2021-09-15"),
+(default, 4, 4, "Quiero estudiar Neogios Digitales, con quien puedo hablar?", "2021-09-15", "2021-09-15");
