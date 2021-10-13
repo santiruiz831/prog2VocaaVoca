@@ -17,8 +17,8 @@ module.exports = function(sequelize, dataTypes){
         },
         created_at:{
             type: dataTypes.DATE
-        }
-        created_at:{
+        },
+        updated_at:{
             type: dataTypes.DATE
         }
 

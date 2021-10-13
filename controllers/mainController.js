@@ -4,8 +4,7 @@ let mainController = {
     index: function(req, res, next) {
         models.Post.findAll()
         .then(posteos => {
-            return res.send(posteos)
-            //res.render('index', { title: 'Voca a Voca', data: db.listaPosts });
+            res.render('index', { title: 'Voca a Voca', data: posteos });
         }) 
         
     },
