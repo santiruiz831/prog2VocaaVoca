@@ -11,12 +11,12 @@
                                 <div>
                                     <img src="<%= element.user_id %> " alt="">
                                 </div>
-                                <h4><a  class="nombreusuario hrefcolor" href="/users/profile"><%= element.user_id%></a></h4>
+                                <h4><a  class="nombreusuario hrefcolor" href="/users/profile"><%= element.user_name%></a></h4>
                                 
                             </div>
                             <div class="post-body uk-flex uk-flex-center">
                                 <a href="/posts/detail">
-                                    <img src=<%=  element.imagenPost %> alt="">
+                                    <img src=<%=  element.img %> alt="">
                                 </a>
                             </div>
                             <div class="post-reacciones">
@@ -27,7 +27,7 @@
                                     </li>
                                 </ul>
                                 <div class="post-pie uk-flex">
-                                    <h5  class="uk-width-1-6"> <a class="hrefcolor" href="/users/profile"><%= element.user_id%></a></h5>
+                                    <h5  class="uk-width-1-6"> <a class="hrefcolor" href="/users/profile"><%= element.user_name%></a></h5>
                                     <p class="uk-width-5-6"><%= element.descripcion %> </p>
                                 </div>
                             </div>
@@ -35,11 +35,11 @@
                                 <h6>Comentarios</h6>
                                 <ul>
                                     <li>
-                                        <a href="/users/profile"><%= element.user_id%></a>
+                                        <a href="/users/profile"><%= element.user_name%></a>
                                         <p> Que inspirador </p>
                                     </li>
                                     <li>
-                                        <a href="/users/profile"><%= element.user_id%></a>
+                                        <a href="/users/profile"><%= element.user_name%></a>
                                         <p>Aguante Voca a Voca</p>
                                     </li>
                                     <a class="hrefcolor" href="posts/detail">Ver más...</a>
