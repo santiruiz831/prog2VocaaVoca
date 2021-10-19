@@ -31,6 +31,16 @@ let config = {
 
 const Post = sequelize.define(alias, cols, config)
 
+Post.associate = function(models){
+    Post.belongsTo(models.User,{
+        as: 'post', 
+        foreignKey: 'user_id'
+    })
+    Post.hasMany(models.Comment,{
+        as: 'comments', 
+        foreignKey: 'post_id'
+    })
+}
 return Post
 
 }
