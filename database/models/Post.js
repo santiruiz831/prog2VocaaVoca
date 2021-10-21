@@ -33,7 +33,7 @@ const Post = sequelize.define(alias, cols, config)
 
 Post.associate = function(models){
     Post.belongsTo(models.User,{
-        as: 'post', 
+        as: 'user', 
         foreignKey: 'user_id'
     })
     Post.hasMany(models.Comment,{

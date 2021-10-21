@@ -1,9 +1,15 @@
 const db = require('../data/usersData');
 const postData = require('../data/postData');
+const models = require('../database/models')
 
 let userController = {
     profile: function(req, res) {
-        res.render('miPerfil', {title: 'perfil', data: db, postInfo: postData.listaPosts});
+    models.User.findByPk(req.params.id, {
+        include: [{association:'posts'},{association:'comments'}]
+    }).then(user => {
+        //res.send(user)
+        res.render('miPerfil', {title: 'perfil', data: user});
+    })        
     },
     editProfile: function(req, res) {
         res.render('editarPerfil', {title: 'editarPerfil'});

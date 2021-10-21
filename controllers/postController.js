@@ -1,8 +1,22 @@
 const comments = require('../data/commentsData');
-const post = require('../data/postData');
+let models = require('../database/models')
 let postController = {
     detail: function(req, res, next) {
-        res.render('detallePost', {title: 'detallePost', comments: comments.listaComments, post: post.listaPosts});
+        models.Post.findByPk(req.params.id, {
+            include: [{
+            association:'comments',
+            include: {
+                association:"user"
+            }
+        },
+
+            {association:'user',
+            
+        }]
+        }).then(post => {
+            res.render('detallePost', {title: 'detallePost', data: post});
+
+        }) 
     },
     addPost: function(req, res, next) {
         res.render('agregarPost', {title: 'agregarPost'});
