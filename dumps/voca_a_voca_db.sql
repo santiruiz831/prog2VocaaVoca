@@ -36,7 +36,7 @@ FOREIGN KEY (post_id) REFERENCES posts (id)
 
 INSERT INTO users VALUES 
 (default, "Santiago", "Ruiz", "sruiz@udesa.edu.ar", "hola123", "/images/Santi.png", "2001-08-13", "1126112001"),
-(default, "Micaela", "Salas", "msalas@udesa.edu.ar", "chau1234", "/images/Mica.png",, "2001-09-15", "1126112001"),
+(default, "Micaela", "Salas", "msalas@udesa.edu.ar", "chau1234", "/images/Mica.png", "2001-09-15", "1126112001"),
 (default, "Pehuen", "Romani", "promani@digitalhouse.edu.ar", "p1230", "/images/pehuen.png", "1985-09-12", "1126112001"),
 (default, "Maca", "Amijo", "maca@digitalhouse.edu.ar", "maca0000", "/images/maca.png", "1995-09-12", "1126112001"),
 (default, "Everaldo", "Guevara", "everaldo@digitalhouse.edu.ar", "eve1111", "/images/everaldo.png", "1984-08-11", "1126112001");
