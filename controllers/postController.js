@@ -22,7 +22,11 @@ let postController = {
         res.render('agregarPost', {title: 'agregarPost'});
     },
     create: function(req, res, next) {
-        res.render('agregarPost', {title: 'agregarPost'});
+        db.Post.create(req.body)
+        .then((post)=> res.redirect('/'))
+        .catch(error => {
+            return res.render(error);
+        })  
     },
     search: function(req, res, next) {
         res.render('index', {title: 'index'});
