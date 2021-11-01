@@ -10,7 +10,7 @@ mail VARCHAR (200),
 password VARCHAR (200),
 img VARCHAR(300),
 birthday DATE,    
-age INT
+phone INT
 );
 
 CREATE TABLE posts(

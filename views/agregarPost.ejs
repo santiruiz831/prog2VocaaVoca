@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <%- include('./partials/head') %> 
+    <%-include('./partials/head')%> 
 
 <body>
-    <%- include("./partials/headerLogueado") %> 
+    <%-include("./partials/headerDeslogueado")%> 
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,9 +22,9 @@
 		<h1>Agregar Posteo</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form action="#" method="post">
-					<input type="file" name="imagen" placeholder="imagen" required="">
-					<textarea id="w3review" name="w3review" rows="4" cols="50">
+				<form action="/posts/add" method="POST">
+					<!--<input type="file" name="imagen" placeholder="imagen" required="">-->
+					<textarea id="w3review" name="description" rows="4" cols="50">
 						</textarea>
 
 					<div class="wthree-text">

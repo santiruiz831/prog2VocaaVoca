@@ -1,6 +1,7 @@
-const db = require('../data/usersData');
 const postData = require('../data/postData');
 const models = require('../database/models')
+const bcrypt = require('bcryptjs');
+const db = require('../database/models');
 
 let userController = {
     profile: function(req, res) {
@@ -17,9 +18,50 @@ let userController = {
     register: function(req, res) {
         res.render('registracion', {title: 'registrarse'});
     },
-    login: function(req, res) {
-        res.render('login', {title: 'login'});
-    }
+    store: function(req, res) {
+        req.body.password = bcrypt.hashSync(req.body.password, 10);
+           models.User.create({...req.body})
+           .then(user => {
+             console.log(user)
+             res.redirect('/users/login');
+           }).catch(error => {
+             return res.render(error);
+           })
+        },
+    logout: function(req, res, next) {
+      res.clearCookie('user');
+      req.session.user = null;
+      res.redirect('/');
+    },
+    login: async function(req, res, next) {
+        if (req.method == 'POST') {
+          const user = await models.User.findOne({ where: {mail: req.body.email}});
+          if (!user) {
+            res.send('NO EXISTE EL USUARIO')
+          }
+          if (bcrypt.compareSync(req.body.password, user.password)) {
+            req.session.user = user;
+            res.cookie('user', user, { maxAge: 1000 * 60 * 60 * 24 * 30 })
+            res.redirect('/');
+          } else {
+            res.send('LA CONSTRASEÑA ES INCORRECTA')
+          }
+        } else {
+          res.render('login', {title: 'login'});
+        }
+      },
+      search: async function(req, res, next) {
+        const posts = await models.Post.findAll({ where: {
+          [op.or]: [
+            { content: { [op.like]: "%"+req.query.criteria+"%"} },
+            { image: { [op.like]: "%"+req.query.criteria+"%"} },
+          ]
+          }}
+        )
+  
+        // []
+        res.render('search', { posts, criteria: req.query.criteria });
+      },
 }
 
 module.exports = userController;

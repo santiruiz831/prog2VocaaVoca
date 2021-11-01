@@ -8,14 +8,15 @@
 		<h1>Registrarse</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form action="/" method="GET">
-					<input class="text w3lpass" type="text" name="nombre" placeholder="Nombre" required="">
-					
-					<input class="text2 text w3lpass" type="text" name="apellido" placeholder="Apelllido" required="">
-					<input class="text2 text w3lpass " type="email" name="email" placeholder="Email"required="" >
+				<form action="/users/register" method="POST">
+					<input class="text w3lpass" type="text" name="name" placeholder="nombre" required="">
+					<input class="text2 text w3lpass" type="text" name="last_name" placeholder="Apelllido" required="">
+					<input class="text2 text w3lpass " type="email" name="mail" placeholder="Email"required="" >
 					<input class="text w3lpass" type="password" name="password" placeholder="Contraseña" required="">
-					<input class=" text2 text w3lpass" type="password" name="Contraseña" placeholder="Confirmar Contraseña" required="">
-					<input class="text2 date" type="date" name="Email" placeholder=""required="" ></p>
+					<input class="text2 date" type="date" name="birthday" placeholder="fecha de nacimiento"required="" ></p>
+					<input class="text2 date" type="tel" name="phone" placeholder="telefono"required="" ></p>
+					<!--<input class="text2 date" type="file" name="img" placeholder="foto de perfil"required="" ></p> -->
+
 
 					<div class="wthree-text">
 						<label class="anim">

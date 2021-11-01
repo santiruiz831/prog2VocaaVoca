@@ -1,4 +1,3 @@
-const db = require('../data/postData');
 let models = require('../database/models')
 let mainController = {
     index: function(req, res, next) {
