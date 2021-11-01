@@ -28,12 +28,7 @@ let userController = {
              return res.render(error);
            })
         },
-    logout: function(req, res, next) {
-      res.clearCookie('user');
-      req.session.user = null;
-      res.redirect('/');
-    },
-    login: async function(req, res, next) {
+      login: async function(req, res, next) {
         if (req.method == 'POST') {
           const user = await models.User.findOne({ where: {mail: req.body.email}});
           if (!user) {
@@ -49,7 +44,12 @@ let userController = {
         } else {
           res.render('login', {title: 'login'});
         }
-      },
+      },    
+    logout: function(req, res, next) {
+      res.clearCookie('user');
+      req.session.user = null;
+      res.redirect('/');
+    },
       search: async function(req, res, next) {
         const posts = await models.Post.findAll({ where: {
           [op.or]: [
