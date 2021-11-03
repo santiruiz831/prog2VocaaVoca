@@ -8,8 +8,10 @@ const session = require('express-session');
 var indexRouter = require('./routes/index');
 var postsRouter = require('./routes/posts');
 var usersRouter = require ('./routes/users');
+const db = require('./database/models');
 
 var app = express();
+//db.sequelize.sync({alter: true});
 
 app.use(
   session({  
