@@ -8,7 +8,7 @@
 		<h1>Registrarse</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form action="/users/register" method="POST">
+				<form action="/users/register" enctype="multipart/form-data" method="POST">
 					<input class="text w3lpass" type="text" name="name" placeholder="nombre" required="">
 					<input class="text2 text w3lpass" type="text" name="last_name" placeholder="Apelllido" required="">
 					<input class="text2 text w3lpass " type="mail" name="mail" placeholder="Mail"required="" >
@@ -16,7 +16,7 @@
 					<input class="text2 date" type="date" name="birthday" placeholder="Fecha de nacimiento"required="" ></p>
 					<br>
 					<input class="text2 date" type="tel" name="phone" placeholder="Telefono" required="" ></p>
-					<!--<input class="text2 date" type="file" name="img" placeholder="Foto de perfil"required="" ></p> -->
+					<input class="text2 date" type="file" name="avatar" placeholder="Foto de perfil"required="" ></p>
 
 
 					<div class="wthree-text">

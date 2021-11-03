@@ -21,8 +21,9 @@ let postController = {
         res.render('agregarPost', {title: 'agregarPost'});
     },
     create: function(req, res, next) {
+      if (req.file) req.body.img = (req.file.destination + req.file.filename).replace('public', '');
       models.Post.create({
-        ...req.body
+        ...req.body,user_id: req.session.user.id
       }).then(post => {
         console.log(post);
         res.redirect('/');

@@ -1,6 +1,11 @@
 <%- include('./partials/head') %> 
 <body>
-<%- include("./partials/headerDeslogueado") %> 
+<% if (app.user) {  %>
+    <%- include("./partials/headerLogueado") %> 
+<% } else {%>
+    <%- include("./partials/headerDeslogueado") %> 
+    <% } %>
+
     <main>
         <% console.log(data) %>
         <div class="uk-section uk-section-small">

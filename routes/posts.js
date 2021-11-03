@@ -8,7 +8,7 @@ let postController = require('../controllers/postController')
 /* GET home page. */
 router.get('/detail/:id?', postController.detail);
 router.get('/add', postController.addPost);
-router.post('/add', postController.create);
+router.post('/add', upload.single('img'), postController.create);
 router.get('/search', postController.search);
 
 router.get('/:id/delete', postController.delete);
