@@ -8,19 +8,14 @@
                 <div class="uk-navbar-center">
                     <ul class="uk-flex uk-flex-between uk-flex-middle">
                         <li><a href="/">Home</a></li>
-                        <li><a href="logout">Logout</a></li>
+                        <li><a href="/users/logout">Logout</a></li>
                     </ul>
-                </div>
-                 <ul class="navbar-nav me-3 mb-2 mb-md-0">
-                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                            <input type="search" class="form-control form-control-sm form-control-dark" name="criteria" id="criteria" placeholder="Buscar">
-                        </form>
-                        <li class="nav-item">
-                            <a class="nav-link">Hola <%= app.user.name %></a>
-                        </li>
+                </div> 
+                
+                       
                 <div class="uk-navbar-right">
                     <a href="/posts/add">Agregar post</a>
-                    <a href="/users/profile/1">Mi perfil</a>
+                    <a href="/users/profile/<%= app.user.id %> "><%=app.user.name%></a>
                     <form action="" class="uk-search uk-search-default">
                         <span uk-search-icon></span>
                         <input type="search" class="uk-search-input" placeholder="Buscar...">

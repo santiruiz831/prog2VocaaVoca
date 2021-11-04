@@ -1,22 +1,25 @@
  <%- include('./partials/head') %> 
 
  <body>
-    <%- include('./partials/headerLogueado') %> 
+    <% if (app.user) {  %>
+		<%- include("./partials/headerLogueado") %> 
+	<% } else {%>
+		<%- include("./partials/headerDeslogueado") %> 
+		<% } %>
 
 	
 	<div class="main-w3layouts wrapper">
 		<h1>Editar Perfil</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form action="/users/profile" method="POST">
-					<input class="text" type="text" name="name" placeholder="Nombre" required="">
+				<form action="/users/edit" method="POST">
+					<input class="text" type="text" name="name" placeholder="Nombre"  value="<%= user.name %> ">
 					<br>
-					<input class="text" type="text" name="last_name" placeholder="Apellido" required="">
-					<input class="text email" type="mail" name="mail" placeholder="Mail" required="">
-					<input class="text" type="password" name="password" placeholder="Contraseña" required="">
-          			<input class="date" type="date" name="birthday" placeholder="Fecha de nacimiento" required="">
-					<input class="text2 date" type="tel" name="phone" placeholder="Telefono" required="" ></p>
-
+					<input class="text" type="text" name="last_name" placeholder="Apellido" value="<%= user.last_name %> ">
+					<input class="text email" type="mail" name="mail" placeholder="Mail" value="<%= user.mail %> ">
+					<input class="text" type="password" name="password" placeholder="Contraseña" value="">
+					<input class="text2 date" type="tel" name="phone" placeholder="Telefono"  value="<%= user.phone %> "></p>
+					<input type="hidden" name="id" value="<%= user.id %> ">
 					<div class="wthree-text">
 					</div>
 					<input type="submit" value="Guardar Cambios">

@@ -13,7 +13,30 @@ let userController = {
     });
   },
   editProfile: function (req, res) {
-    res.render("editarPerfil", { title: "editarPerfil" });
+    models.User.findByPk(req.params.id).then((user) => {
+      user.password = res.render("editarPerfil", {
+        title: "editarPerfil",
+        user: user,
+      });
+    });
+  },
+  storeEdit: function (req, res) {
+    if (req.body.password.length == 0) {
+      models.User.findByPk(req.body.id)
+      .then((user) => {
+        req.body.password = user.password
+      })
+    }else{
+      req.body.password = bcrypt.hashSync(req.body.password, 10);
+    }
+    models.User.update({ ...req.body }, {where:{id:req.body.id}})
+      .then((user) => {
+        console.log(user);
+        res.redirect(`/users/profile/${req.body.id}`);
+      })
+      .catch((error) => {
+        return res.render(error);
+      });
   },
   register: function (req, res) {
     res.render("registracion", { title: "registrarse" });
@@ -50,13 +73,13 @@ let userController = {
         res.send("LA CONSTRASEÑA ES INCORRECTA");
       }
     } else {
-      res.render("login", {title: "login"});
+      res.render("login", { title: "login" });
     }
   },
   logout: function (req, res, next) {
     res.clearCookie("user");
     req.session.user = null;
-    res.redirect("/");
+    return res.redirect("/");
   },
   search: async function (req, res, next) {
     const posts = await models.Post.findAll({
