@@ -47,6 +47,10 @@ User.associate = function(models){
         as: 'posts', 
         foreignKey: 'user_id'
     })
+    User.hasMany(models.Follow, {
+        as: 'following',
+        foreignKey: 'follower_id'
+    });
 }
 return User
 

@@ -40,6 +40,10 @@ Post.associate = function(models){
         as: 'comments', 
         foreignKey: 'post_id'
     })
+    Post.hasMany(models.Like, {
+        as: 'likes',
+        foreignKey: 'post_id'
+    })
 }
 return Post
 

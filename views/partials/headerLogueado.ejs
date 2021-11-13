@@ -16,9 +16,9 @@
                 <div class="uk-navbar-right">
                     <a href="/posts/add">Agregar post</a>
                     <a href="/users/profile/<%= app.user.id %> "><%=app.user.name%></a>
-                    <form action="" class="uk-search uk-search-default">
+                    <form action="/posts/search" class="uk-search uk-search-default">
                         <span uk-search-icon></span>
-                        <input type="search" class="uk-search-input" placeholder="Buscar...">
+                        <input name="text" type="search" class="uk-search-input" placeholder="Buscar...">
                     </form>
                 </div>
             </nav>

@@ -4,11 +4,20 @@ const bcrypt = require("bcryptjs");
 const db = require("../database/models");
 
 let userController = {
+  detalle: async function (req, res) {
+    const user = await db.User.findByPk(req.params.id, {
+      include: [{ all: true }],
+      order: [["posts", "id", "desc"]],
+    });
+
+    res.render("users/detalle", { user });
+  },
   profile: function (req, res) {
     models.User.findByPk(req.params.id, {
       include: [{ association: "posts" }, { association: "comments" }],
     }).then((user) => {
       //res.send(user)
+      console.log(user);
       res.render("miPerfil", { title: "perfil", data: user });
     });
   },
@@ -22,14 +31,13 @@ let userController = {
   },
   storeEdit: function (req, res) {
     if (req.body.password.length == 0) {
-      models.User.findByPk(req.body.id)
-      .then((user) => {
-        req.body.password = user.password
-      })
-    }else{
+      models.User.findByPk(req.body.id).then((user) => {
+        req.body.password = user.password;
+      });
+    } else {
       req.body.password = bcrypt.hashSync(req.body.password, 10);
     }
-    models.User.update({ ...req.body }, {where:{id:req.body.id}})
+    models.User.update({ ...req.body }, { where: { id: req.body.id } })
       .then((user) => {
         console.log(user);
         res.redirect(`/users/profile/${req.body.id}`);
@@ -42,13 +50,16 @@ let userController = {
     res.render("registracion", { title: "registrarse" });
   },
   store: function (req, res) {
-    if (req.file)
-      req.body.avatar = (req.file.destination + req.file.filename).replace(
+    if (req.file) {
+      req.body.img = (req.file.destination + req.file.filename).replace(
         "public",
         ""
       );
+    }
     req.body.password = bcrypt.hashSync(req.body.password, 10);
-    models.User.create({ ...req.body })
+    models.User.create({
+      ...req.body,
+    })
       .then((user) => {
         console.log(user);
         res.redirect("/users/login");
@@ -93,6 +104,35 @@ let userController = {
 
     // []
     res.render("search", { posts, criteria: req.query.criteria });
+  },
+  follow: function (req, res) {
+    if (!req.session.user) {
+      res.redirect("/users/" + req.params.id);
+    }
+    db.Follow.create({
+      follower_id: req.session.user.id,
+      following_id: req.params.id,
+    })
+      .then((follow) => {
+        res.redirect("/users/" + req.params.id);
+      })
+      .catch((error) => {
+        return res.send(error);
+      });
+  },
+  unfollow: function (req, res) {
+    if (!req.session.user) {
+      res.redirect("/users/" + req.params.id);
+    }
+    db.Follow.destroy({
+      where: { follower_id: req.session.user.id, following_id: req.params.id },
+    })
+      .then(() => {
+        res.redirect("/users/" + req.params.id);
+      })
+      .catch((error) => {
+        return res.render(error);
+      });
   },
 };
 

@@ -33,9 +33,16 @@
                                 </div>
                             <% }) %>
                         </div>
+                        <% if (data.user.id == app.user.id) { %>
+                         <form action="/posts/<%= data.id %>/delete" method="post" class="uk-search uk-search-default">
+                        <input type="submit" value="delete"> 
+                        </form>
+                        <% } %>
+                        
                         <div class="agregar-comentario uk-flex uk-flex-middle">
-                            <form action="" class="uk-text-center">
-                              <input type="text" class="uk-input" placeholder="Agregar comentario"> 
+                            <form action="/posts/comment" method="post" class="uk-text-center">
+                              <input type="hidden" name="post_id" value="<%= data.id %>">
+                              <input type="text" class="uk-input" required name="content" placeholder="Agregar comentario" minlength="1"> 
                               <button class="uk-button uk-button-primary uk-margin-small-top" type="submit">Comentar</button>
                             </form>
                         </div>
