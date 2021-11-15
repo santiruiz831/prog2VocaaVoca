@@ -19,6 +19,7 @@ let mainController = {
             //res.send(posteos)
             res.render('index', { title: 'Voca a Voca', data: posteos });
         }) 
+        .catch(error => res.send(error));
         
     },
     

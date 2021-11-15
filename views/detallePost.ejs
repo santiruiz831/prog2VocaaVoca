@@ -35,7 +35,13 @@
                         </div>
                         <% if (data.user.id == app.user.id) { %>
                          <form action="/posts/<%= data.id %>/delete" method="post" class="uk-search uk-search-default">
-                        <input type="submit" value="delete"> 
+                        <input type="submit" value="delete">
+                        <button type="submit" class="btn btn-danger">Borrar</button> 
+                        </form>
+                         
+                        <form action="/posts/<%= data.id %>/update" method="post" class="uk-search uk-search-default">
+                        <input type="submit" value="update"> 
+                        <button type="submit" class="btn btn-primary" >Editar</button>
                         </form>
                         <% } %>
                         

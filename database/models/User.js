@@ -29,7 +29,7 @@ module.exports = function(sequelize, dataTypes){
         }
 
     }
-let config = {
+const config = {
     tableName: "users",
     timestamps: false,
     underscored: true
@@ -48,8 +48,12 @@ User.associate = function(models){
         foreignKey: 'user_id'
     })
     User.hasMany(models.Follow, {
-        as: 'following',
+        as: 'followers',
         foreignKey: 'follower_id'
+    });
+    User.hasMany(models.Follow, {
+        as: 'following',
+        foreignKey: 'following_id'
     });
 }
 return User

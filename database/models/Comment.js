@@ -23,7 +23,7 @@ module.exports = function(sequelize, dataTypes){
         }
     }
     
-let config = {
+const config = {
     tableName: "comments",
     timestamps: true,
     underscored: true

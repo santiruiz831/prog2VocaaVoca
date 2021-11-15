@@ -9,7 +9,7 @@
     <% } else {%>
         <%- include("./partials/headerDeslogueado") %> 
         <% } %>
-
+<% console.log(data) %> 
     <main>
         <div class="uk-section uk-section-small">
             <div class="uk-container uk-container-small">
@@ -24,10 +24,19 @@
                         </div>
                         <div>
                             <ul class="red-usuario uk-flex uk-flex-between uk-width-1-2">
-                                <li><%= data.posts.length %>  posts</li>
+                               <!-- <li><%= //data.posts.length %>  posts</li> -->
                                 <li> 3 seguidores</li>
                                 <li> 5400 seguidos</li>
                             </ul>
+                            <% if (data.id != app.user.id) { %>
+                                <div class="float-end">
+                                  <% if (data.followers.find(follow => follow.follower_id == app.user.id)) { %>
+                                    <a href="/users/<%= data.id %>/unfollow" class="btn btn-danger">Unfollow</a>
+                                  <% } else { %>
+                                    <a href="/users/<%= data.id %>/follow" class="btn btn-primary">Follow</a>
+                                  <% } %>
+                                </div>
+                              <% } %>
                         </div>
                     </div>
 

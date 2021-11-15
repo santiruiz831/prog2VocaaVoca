@@ -10,15 +10,16 @@ let userController = {
       order: [["posts", "id", "desc"]],
     });
 
-    res.render("users/detalle", { user });
+    res.render("miPerfil", { user });
   },
   profile: function (req, res) {
-    models.User.findByPk(req.params.id, {
-      include: [{ association: "posts" }, { association: "comments" }],
-    }).then((user) => {
+    let data=models.User.findByPk(req.params.id, {
+      include: [{ all: true} ],
+    }).then((data) => {
       //res.send(user)
-      console.log(user);
-      res.render("miPerfil", { title: "perfil", data: user });
+      res.render("miPerfil", { title: "perfil", data: data });
+      console.log(data)
+      console.log("dataconsole")
     });
   },
   editProfile: function (req, res) {
@@ -96,8 +97,8 @@ let userController = {
     const posts = await models.Post.findAll({
       where: {
         [op.or]: [
-          { content: { [op.like]: "%" + req.query.criteria + "%" } },
-          { image: { [op.like]: "%" + req.query.criteria + "%" } },
+          { user: { [op.like]: "%" + req.query.criteria + "%" } },
+          //{ image: { [op.like]: "%" + req.query.criteria + "%" } },
         ],
       },
     });
