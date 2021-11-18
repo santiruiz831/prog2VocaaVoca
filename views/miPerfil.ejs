@@ -9,7 +9,6 @@
     <% } else {%>
         <%- include("./partials/headerDeslogueado") %> 
         <% } %>
-<% console.log(data) %> 
     <main>
         <div class="uk-section uk-section-small">
             <div class="uk-container uk-container-small">
@@ -30,7 +29,7 @@
                             </ul>
                             <% if (data.id != app.user.id) { %>
                                 <div class="float-end">
-                                  <% if (data.followers.find(follow => follow.follower_id == app.user.id)) { %>
+                                  <% if (data.following.find(follow => follow.follower_id == app.user.id)) { %>
                                     <a href="/users/<%= data.id %>/unfollow" class="btn btn-danger">Unfollow</a>
                                   <% } else { %>
                                     <a href="/users/<%= data.id %>/follow" class="btn btn-primary">Follow</a>

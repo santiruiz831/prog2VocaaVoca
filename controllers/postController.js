@@ -45,13 +45,20 @@ let postController = {
         return res.render(error);
       })
     },
-    edit: async function(req, res) {
-        const post = await models.Post.findByPk(req.params.id)
-        if (!post) {
-          return res.render('error');
+    edit: function(req, res) {
+      models.Post.findByPk(req.params.id)
+      .then((data) => {
+        //res.send(data)
+        if (!data) {
+          res.redirect('/')
+        } else if (data.user_id != req.session.user.id) {
+          res.redirect('/')
+        } else {
+          res.render('editarPost', {title: 'editar post', post: data});
         }
   
-        res.render('posts/edit', {post});
+        
+      })
       },
       update: function(req, res) {
         models.Post.update(req.body, { where: { id: req.params.id }}).then(post => {

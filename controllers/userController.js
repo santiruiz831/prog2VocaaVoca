@@ -16,10 +16,8 @@ let userController = {
     let data=models.User.findByPk(req.params.id, {
       include: [{ all: true} ],
     }).then((data) => {
-      //res.send(user)
+      //res.send(data)
       res.render("miPerfil", { title: "perfil", data: data });
-      console.log(data)
-      console.log("dataconsole")
     });
   },
   editProfile: function (req, res) {
@@ -115,7 +113,7 @@ let userController = {
       following_id: req.params.id,
     })
       .then((follow) => {
-        res.redirect("/users/" + req.params.id);
+        res.redirect("/");
       })
       .catch((error) => {
         return res.send(error);
@@ -129,7 +127,7 @@ let userController = {
       where: { follower_id: req.session.user.id, following_id: req.params.id },
     })
       .then(() => {
-        res.redirect("/users/" + req.params.id);
+        res.redirect("/");
       })
       .catch((error) => {
         return res.render(error);
