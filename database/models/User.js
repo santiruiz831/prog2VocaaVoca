@@ -26,12 +26,18 @@ module.exports = function(sequelize, dataTypes){
         },
         phone:{
             type: dataTypes.INTEGER
+        },
+        created_at:{
+            type: dataTypes.DATE
+        },
+        updated_at:{
+            type: dataTypes.DATE
         }
 
     }
 const config = {
     tableName: "users",
-    timestamps: false,
+    timestamps: true,
     underscored: true
 }
 

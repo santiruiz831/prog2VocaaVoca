@@ -24,8 +24,8 @@
                         <div>
                             <ul class="red-usuario uk-flex uk-flex-between uk-width-1-2">
                                <!-- <li><%= //data.posts.length %>  posts</li> -->
-                                <li> 3 seguidores</li>
-                                <li> 5400 seguidos</li>
+                                <li> <%= data.followers.length %>  seguidos</li>
+                                <li> <%= data.following.length %> seguidores</li>
                             </ul>
                             <% if (data.id != app.user.id) { %>
                                 <div class="float-end">

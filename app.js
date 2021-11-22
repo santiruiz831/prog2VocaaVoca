@@ -39,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(async (req, res, next) => {
   if (req.cookies.user != undefined && req.session.user == undefined) {
     req.session.user = req.cookies.user;
+    res.locals.user = req.cookies.user;
   }
   next();
 });

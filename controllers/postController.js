@@ -38,10 +38,24 @@ let postController = {
     },
     delete: function(req, res, next) {
          // Chequear que sea el owner
-      models.Post.destroy({ where: { id: req.params.id }})
-      .then(() => {
-        res.redirect('/');
-      }).catch(error => {
+          models.Post.findByPk(req.params.id, {
+              include: [{
+              association:'comments',
+              include: {
+                  association:"user"
+              }
+          },
+  
+              {association:'user',
+              
+          }]
+          }).then(post => {
+            if (post.user.id == req.body.userId) {
+              models.Post.destroy({ where: { id: req.params.id }})
+            }
+            res.redirect('/');
+          }) 
+        .catch(error => {
         return res.render(error);
       })
     },
@@ -61,6 +75,7 @@ let postController = {
       })
       },
       update: function(req, res) {
+        if (req.file) req.body.img = (req.file.destination + req.file.filename).replace('public', '');
         models.Post.update(req.body, { where: { id: req.params.id }}).then(post => {
           res.redirect('/');
         }).catch(error => {
@@ -119,6 +134,7 @@ let postController = {
             association: 'comments',
             include:{association: 'user'}
         }],
+        limit:10,
         where:{
           [op.or]:[{
             description:{
@@ -128,7 +144,12 @@ let postController = {
         }
         })
         .then(posteos => {
-            res.render('resultadoBusqueda', { title: 'Voca a Voca', data: posteos , search:req.query.text});
+          if (posteos.length > 0) {
+            res.render('resultadoBusqueda', { title: 'Voca a Voca', data: posteos , search:'Mostrando resultados para:' + req.query.text});
+          } else {
+            res.render('resultadoBusqueda', { title: 'Voca a Voca', data: posteos , search:'No hay resultados para:' + req.query.text});
+          }
+            
         }) 
         
     },

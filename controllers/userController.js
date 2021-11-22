@@ -2,6 +2,7 @@ const postData = require("../data/postData");
 const models = require("../database/models");
 const bcrypt = require("bcryptjs");
 const db = require("../database/models");
+const op = models.Sequelize.Op
 
 let userController = {
   detalle: async function (req, res) {
@@ -68,12 +69,13 @@ let userController = {
       });
   },
   login: async function (req, res, next) {
+    if (!req.session.user) {
     if (req.method == "POST") {
       const user = await db.User.findOne({
         where: { mail: req.body.mail },
       });
       if (!user) {
-        res.send("NO EXISTE EL USUARIO");
+        res.send("EL MAIL INGRESADO NO CORRESPONDE A NINGUN USUARIO");
       }
       if (bcrypt.compareSync(req.body.password, user.password)) {
         req.session.user = user;
@@ -84,6 +86,8 @@ let userController = {
       }
     } else {
       res.render("login", { title: "login" });
+    }} else {
+      res.redirect('/')
     }
   },
   logout: function (req, res, next) {
@@ -91,18 +95,25 @@ let userController = {
     req.session.user = null;
     return res.redirect("/");
   },
-  search: async function (req, res, next) {
-    const posts = await models.Post.findAll({
-      where: {
-        [op.or]: [
-          { user: { [op.like]: "%" + req.query.criteria + "%" } },
-          //{ image: { [op.like]: "%" + req.query.criteria + "%" } },
-        ],
-      },
-    });
-
-    // []
-    res.render("search", { posts, criteria: req.query.criteria });
+  search: function (req, res, next) {
+    models.User.findAll({
+      include: [{ all: true} ],
+      limit:10,
+          where:{
+      [op.or]:[{
+        name:{
+          [op.like]:'%' + req.query.text + '%'
+        }
+      }]
+    }
+    })
+    .then(posteos => {
+        if (posteos.length > 0) {
+          res.render('resultadoBusqueda', { title: 'Voca a Voca', data: posteos , search:'Mostrando resultados para:' + req.query.text});
+        } else {
+          res.render('resultadoBusqueda', { title: 'Voca a Voca', data: posteos , search:'No hay resultados para:' + req.query.text});
+        }
+    }) 
   },
   follow: function (req, res) {
     if (!req.session.user) {
@@ -112,12 +123,12 @@ let userController = {
       follower_id: req.session.user.id,
       following_id: req.params.id,
     })
-      .then((follow) => {
-        res.redirect("/");
-      })
-      .catch((error) => {
-        return res.send(error);
-      });
+      .then( async function() {
+        const user = await db.User.findByPk(req.params.id, {
+          include: [{ all: true }],
+          order: [["posts", "id", "desc"]],
+        })
+       res.render("miPerfil", { data: user })});
   },
   unfollow: function (req, res) {
     if (!req.session.user) {
@@ -126,9 +137,12 @@ let userController = {
     db.Follow.destroy({
       where: { follower_id: req.session.user.id, following_id: req.params.id },
     })
-      .then(() => {
-        res.redirect("/");
+    .then( async function() {
+      const user = await db.User.findByPk(req.params.id, {
+        include: [{ all: true }],
+        order: [["posts", "id", "desc"]],
       })
+     res.render("miPerfil", { data: user })})
       .catch((error) => {
         return res.render(error);
       });

@@ -33,12 +33,16 @@
                                 </div>
                             <% }) %>
                         </div>
+                        <% if (app.user) { %>
                         <% if (data.user.id == app.user.id) { %>
                          <form action="/posts/<%= data.id %>/delete" method="POST" class="uk-search uk-search-default">
+                            <input type="hidden" name="userId" value="<%= app.user.id %>">
                         <button type="submit" class="btn btn-danger">Borrar</button> 
                         </form>
+
                          
                         <a href="/posts/<%= data.id %>/edit"> Editar </a> 
+                        <% } %>
                         <% } %>
                         
                         <div class="agregar-comentario uk-flex uk-flex-middle">
