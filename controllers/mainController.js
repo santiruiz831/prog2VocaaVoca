@@ -1,9 +1,8 @@
-let models = require('../database/models')
-
+let db = require('../database/models');
 
 let mainController = {
     index: function(req, res, next) {
-        models.Post.findAll({
+        db.Post.findAll({
           order:[
             ['created_at', 'desc']
           ],
@@ -16,14 +15,11 @@ let mainController = {
         }]
         })
         .then(posteos => {
-            //res.send(posteos)
             res.render('index', { title: 'Voca a Voca', data: posteos });
         }) 
         .catch(error => res.send(error));
         
     },
-    
-    
     like: function(req, res) {
         if (!req.session.user) {
           res.redirect('/posts/'+req.params.id);

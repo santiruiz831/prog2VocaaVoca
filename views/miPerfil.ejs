@@ -23,11 +23,11 @@
                         </div>
                         <div>
                             <ul class="red-usuario uk-flex uk-flex-between uk-width-1-2">
-                               <!-- <li><%= //data.posts.length %>  posts</li> -->
+                                <li> <%= data.posts.length %>  posts</li>
                                 <li> <%= data.followers.length %>  seguidos</li>
                                 <li> <%= data.following.length %> seguidores</li>
                             </ul>
-                            <% if (data.id != app.user.id) { %>
+                            <% if (app.user && data.id != app.user.id) { %>
                                 <div class="float-end">
                                   <% if (data.following.find(follow => follow.follower_id == app.user.id)) { %>
                                     <a href="/users/<%= data.id %>/unfollow" class="btn btn-danger">Unfollow</a>

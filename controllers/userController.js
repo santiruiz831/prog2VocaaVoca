@@ -1,8 +1,7 @@
 const postData = require("../data/postData");
-const models = require("../database/models");
 const bcrypt = require("bcryptjs");
 const db = require("../database/models");
-const op = models.Sequelize.Op
+const op = db.Sequelize.Op;
 
 let userController = {
   detalle: async function (req, res) {
@@ -14,15 +13,14 @@ let userController = {
     res.render("miPerfil", { user });
   },
   profile: function (req, res) {
-    let data=models.User.findByPk(req.params.id, {
-      include: [{ all: true} ],
+    let data = db.User.findByPk(req.params.id, {
+      include: [{ all: true }],
     }).then((data) => {
-      //res.send(data)
       res.render("miPerfil", { title: "perfil", data: data });
     });
   },
   editProfile: function (req, res) {
-    models.User.findByPk(req.params.id).then((user) => {
+    db.User.findByPk(req.params.id).then((user) => {
       user.password = res.render("editarPerfil", {
         title: "editarPerfil",
         user: user,
@@ -31,13 +29,13 @@ let userController = {
   },
   storeEdit: function (req, res) {
     if (req.body.password.length == 0) {
-      models.User.findByPk(req.body.id).then((user) => {
+      db.User.findByPk(req.body.id).then((user) => {
         req.body.password = user.password;
       });
     } else {
       req.body.password = bcrypt.hashSync(req.body.password, 10);
     }
-    models.User.update({ ...req.body }, { where: { id: req.body.id } })
+    db.User.update({ ...req.body }, { where: { id: req.body.id } })
       .then((user) => {
         console.log(user);
         res.redirect(`/users/profile/${req.body.id}`);
@@ -47,7 +45,7 @@ let userController = {
       });
   },
   register: function (req, res) {
-    res.render("registracion", { title: "registrarse" });
+    res.render("registracion", { title: "registrarse", error:null });
   },
   store: function (req, res) {
     if (req.file) {
@@ -56,38 +54,51 @@ let userController = {
         ""
       );
     }
-    req.body.password = bcrypt.hashSync(req.body.password, 10);
-    models.User.create({
-      ...req.body,
-    })
-      .then((user) => {
-        console.log(user);
-        res.redirect("/users/login");
-      })
-      .catch((error) => {
-        return res.render(error);
-      });
+    db.User.findOne({
+      where: [
+        {
+          mail: req.body.mail,
+        },
+      ],
+    }).then((user) => {
+      if (!user) {
+        if(req.body.password.length<=3){
+          res.render("registracion", { error: "Esta contraseña es muy corta" });
+
+        }
+        req.body.password = bcrypt.hashSync(req.body.password, 10);
+        db.User.create({
+          ...req.body,
+        }).then((user) => {
+          console.log(user);
+          res.redirect("/users/login");
+        });
+      } else {
+        res.render("registracion", { error: "Ese mail ya ha sido registrado" });
+      }
+    });
   },
   login: async function (req, res, next) {
     if (!req.session.user) {
-    if (req.method == "POST") {
-      const user = await db.User.findOne({
-        where: { mail: req.body.mail },
-      });
-      if (!user) {
-        res.send("EL MAIL INGRESADO NO CORRESPONDE A NINGUN USUARIO");
-      }
-      if (bcrypt.compareSync(req.body.password, user.password)) {
-        req.session.user = user;
-        res.cookie("user", user, { maxAge: 1000 * 60 * 60 * 24 * 30 });
-        res.redirect("/");
+      if (req.method == "POST") {
+        const user = await db.User.findOne({
+          where: { mail: req.body.mail },
+        });
+        if (!user) {
+          res.send("EL MAIL INGRESADO NO CORRESPONDE A NINGUN USUARIO");
+        }
+        if (bcrypt.compareSync(req.body.password, user.password)) {
+          req.session.user = user;
+          res.cookie("user", user, { maxAge: 1000 * 60 * 60 * 24 * 30 });
+          res.redirect("/");
+        } else {
+          res.send("LA CONSTRASEÑA ES INCORRECTA");
+        }
       } else {
-        res.send("LA CONSTRASEÑA ES INCORRECTA");
+        res.render("login", { title: "login" });
       }
     } else {
-      res.render("login", { title: "login" });
-    }} else {
-      res.redirect('/')
+      res.redirect("/");
     }
   },
   logout: function (req, res, next) {
@@ -96,24 +107,34 @@ let userController = {
     return res.redirect("/");
   },
   search: function (req, res, next) {
-    models.User.findAll({
-      include: [{ all: true} ],
-      limit:10,
-          where:{
-      [op.or]:[{
-        name:{
-          [op.like]:'%' + req.query.text + '%'
-        }
-      }]
-    }
-    })
-    .then(posteos => {
-        if (posteos.length > 0) {
-          res.render('resultadoBusqueda', { title: 'Voca a Voca', data: posteos , search:'Mostrando resultados para:' + req.query.text});
-        } else {
-          res.render('resultadoBusqueda', { title: 'Voca a Voca', data: posteos , search:'No hay resultados para:' + req.query.text});
-        }
-    }) 
+    db.User.findAll({
+      order:[["name", 'desc']],
+      include: [{ all: true }],
+      limit: 10,
+      where: {
+        [op.or]: [
+          {
+            name: {
+              [op.like]: "%" + req.query.text + "%",
+            },
+          },
+        ],
+      },
+    }).then((posteos) => {
+      if (posteos.length > 0) {
+        res.render("resultadoBusqueda", {
+          title: "Voca a Voca",
+          data: posteos,
+          search: "Mostrando resultados para:" + req.query.text,
+        });
+      } else {
+        res.render("resultadoBusqueda", {
+          title: "Voca a Voca",
+          data: posteos,
+          search: "No hay resultados para:" + req.query.text,
+        });
+      }
+    });
   },
   follow: function (req, res) {
     if (!req.session.user) {
@@ -122,13 +143,13 @@ let userController = {
     db.Follow.create({
       follower_id: req.session.user.id,
       following_id: req.params.id,
-    })
-      .then( async function() {
-        const user = await db.User.findByPk(req.params.id, {
-          include: [{ all: true }],
-          order: [["posts", "id", "desc"]],
-        })
-       res.render("miPerfil", { data: user })});
+    }).then(async function () {
+      const user = await db.User.findByPk(req.params.id, {
+        include: [{ all: true }],
+        order: [["posts", "id", "desc"]],
+      });
+      res.render("miPerfil", { data: user });
+    });
   },
   unfollow: function (req, res) {
     if (!req.session.user) {
@@ -137,12 +158,13 @@ let userController = {
     db.Follow.destroy({
       where: { follower_id: req.session.user.id, following_id: req.params.id },
     })
-    .then( async function() {
-      const user = await db.User.findByPk(req.params.id, {
-        include: [{ all: true }],
-        order: [["posts", "id", "desc"]],
+      .then(async function () {
+        const user = await db.User.findByPk(req.params.id, {
+          include: [{ all: true }],
+          order: [["posts", "id", "desc"]],
+        });
+        res.render("miPerfil", { data: user });
       })
-     res.render("miPerfil", { data: user })})
       .catch((error) => {
         return res.render(error);
       });
